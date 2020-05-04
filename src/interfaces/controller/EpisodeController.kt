@@ -19,7 +19,7 @@ fun Route.episodeController() {
     val service = EpisodeServiceImpl()
 
     get<Episodes> { p ->
-        val annimes: List<EpisodeDto> = service.findByAnnictId(p.annictId).map { it.toDto() }
-        call.respond(HttpStatusCode.OK, annimes)
+        val episodes: List<EpisodeDto> = service.findByAnnictId(p.annictId).map { it.toDto() }
+        call.respond(HttpStatusCode.OK, episodes)
     }
 }
