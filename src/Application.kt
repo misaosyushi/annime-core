@@ -2,6 +2,8 @@ package com.annime.core
 
 import com.annime.core.interfaces.controller.annimeController
 import io.ktor.application.*
+import io.ktor.features.ContentNegotiation
+import io.ktor.gson.gson
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -18,6 +20,10 @@ fun main(args: Array<String>) {
 
 
 fun Application.apiModule() {
+    install(ContentNegotiation) {
+        gson {
+        }
+    }
     routing {
         annimeController()
     }
