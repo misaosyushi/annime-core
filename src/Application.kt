@@ -1,6 +1,7 @@
 package com.annime.core
 
 import com.annime.core.interfaces.controller.annimeController
+import com.annime.core.interfaces.controller.episodeController
 import io.ktor.application.*
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
@@ -28,5 +29,6 @@ fun Application.apiModule() {
     install(Locations)
     routing {
         annimeController()
+        episodeController()
     }
 }
