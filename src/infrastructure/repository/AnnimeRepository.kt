@@ -15,6 +15,18 @@ class AnnimeRepository {
         }
     }
 
+    fun findById(id: Long): AnnimeDao? {
+        return transaction {
+            AnnimeDao.findById(id)
+        }
+//        val query = transaction {
+//            Annimes.innerJoin(Season, { Annimes.seasonId }, { Season.id }).select { Annimes.id eq id }
+//        }
+//        return transaction {
+//            AnnimeDao.wrapRows(query).singleOrNull()
+//        }
+    }
+
     fun findBySeasonId(seasonId: Int): List<AnnimeDao> {
         val query = transaction {
             Annimes.innerJoin(Season, { Annimes.seasonId }, { Season.id }).select { Annimes.seasonId eq seasonId }
