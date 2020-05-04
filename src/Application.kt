@@ -1,5 +1,6 @@
 package com.annime.core
 
+import com.annime.core.interfaces.annimeController
 import io.ktor.application.*
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.*
@@ -10,13 +11,15 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 
 fun main(args: Array<String>) {
-    val server = embeddedServer(Netty, 8080) {
-        routing {
-            get("/") {
-                call.respond(HttpStatusCode.OK,"Hello, Kotlin")
-            }
-        }
-    }
-    server.start()
+    embeddedServer(
+        Netty, watchPaths = listOf("build/classes"), port = 8080,
+        module = Application::apiModule
+    ).start()
 }
 
+
+fun Application.apiModule() {
+    routing {
+        annimeController()
+    }
+}
