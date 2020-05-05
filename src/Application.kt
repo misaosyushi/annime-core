@@ -4,6 +4,7 @@ import com.annime.core.interfaces.controller.annimeController
 import com.annime.core.interfaces.controller.castController
 import com.annime.core.interfaces.controller.episodeController
 import io.ktor.application.*
+import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
 import io.ktor.locations.Locations
@@ -28,6 +29,10 @@ fun Application.apiModule() {
         }
     }
     install(Locations)
+    install(CORS) {
+        // TODO: 環境によって許可するドメインを指定するようにする
+        anyHost()
+    }
     routing {
         annimeController()
         episodeController()
