@@ -36,4 +36,6 @@ dependencies {
     implementation "mysql:mysql-connector-java:$mysql_driver_verion"
     implementation "io.ktor:ktor-gson:$ktor_version"
     implementation "io.ktor:ktor-locations:$ktor_version"
+
+    implementation "org.koin:koin-ktor:$koin_version"
 }

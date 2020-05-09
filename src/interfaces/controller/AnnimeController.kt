@@ -4,6 +4,7 @@ import com.annime.core.interfaces.dto.AnnimeDto
 import com.annime.core.interfaces.dto.DetailDto
 import com.annime.core.interfaces.dto.toDetailDto
 import com.annime.core.interfaces.dto.toDto
+import com.annime.core.usecase.AnnimeSevice
 import com.annime.core.usecase.AnnimeSeviceImple
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -12,6 +13,7 @@ import io.ktor.locations.Location
 import io.ktor.locations.get
 import io.ktor.response.respond
 import io.ktor.routing.Route
+import org.koin.ktor.ext.inject
 
 @KtorExperimentalLocationsAPI
 @Location("/annimes/{seasonId}")
@@ -23,7 +25,8 @@ data class Detail(val id: Long)
 
 @KtorExperimentalLocationsAPI
 fun Route.annimeController() {
-    val service = AnnimeSeviceImple()
+//    val service = AnnimeSeviceImple()
+    val service: AnnimeSeviceImple by inject()
 
     get<Annimes> { p ->
         val annimes: List<AnnimeDto> = service.findBySeasonId(p.seasonId).map { it.toDto() }
