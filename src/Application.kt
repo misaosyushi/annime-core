@@ -53,8 +53,8 @@ fun Application.apiModule() {
 val injectModule = module {
     // Services
     single { AnnimeSeviceImple(get()) }
-    single { CastServiceImpl() }
-    single { EpisodeServiceImpl() }
+    single { CastServiceImpl(get()) }
+    single { EpisodeServiceImpl(get()) }
 
     // Repositories
     single { AnnimeRepository() }

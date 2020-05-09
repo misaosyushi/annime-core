@@ -8,9 +8,7 @@ interface EpisodeService {
     fun findByAnnictId(annictId: Long): List<EpisodeDao>
 }
 
-class EpisodeServiceImpl() : EpisodeService {
-
-    private val repository = EpisodeRepository()
+class EpisodeServiceImpl(private val repository: EpisodeRepository) : EpisodeService {
 
     override fun findByAnnictId(annictId: Long): List<EpisodeDao> {
         return repository.findByAnnictId(annictId)

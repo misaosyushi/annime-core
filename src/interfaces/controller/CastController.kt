@@ -10,6 +10,7 @@ import io.ktor.locations.Location
 import io.ktor.locations.get
 import io.ktor.response.respond
 import io.ktor.routing.Route
+import org.koin.ktor.ext.inject
 
 @KtorExperimentalLocationsAPI
 @Location("/casts/{annictId}")
@@ -17,7 +18,7 @@ data class Casts(val annictId: Long)
 
 @KtorExperimentalLocationsAPI
 fun Route.castController() {
-    val service = CastServiceImpl()
+    val service: CastServiceImpl by inject()
 
     get<Casts> { p ->
         val casts: List<CastDto> = service.findByAnnictId(p.annictId).map { it.toDto() }

@@ -4,7 +4,6 @@ import com.annime.core.interfaces.dto.AnnimeDto
 import com.annime.core.interfaces.dto.DetailDto
 import com.annime.core.interfaces.dto.toDetailDto
 import com.annime.core.interfaces.dto.toDto
-import com.annime.core.usecase.AnnimeSevice
 import com.annime.core.usecase.AnnimeSeviceImple
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -25,7 +24,6 @@ data class Detail(val id: Long)
 
 @KtorExperimentalLocationsAPI
 fun Route.annimeController() {
-//    val service = AnnimeSeviceImple()
     val service: AnnimeSeviceImple by inject()
 
     get<Annimes> { p ->
