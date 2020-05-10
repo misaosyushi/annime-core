@@ -3,12 +3,15 @@ package com.annime.core
 import com.annime.core.infrastructure.repository.AnnimeRepository
 import com.annime.core.infrastructure.repository.CastsRepository
 import com.annime.core.infrastructure.repository.EpisodeRepository
+import com.annime.core.infrastructure.repository.SeasonRepository
 import com.annime.core.interfaces.controller.annimeController
 import com.annime.core.interfaces.controller.castController
 import com.annime.core.interfaces.controller.episodeController
+import com.annime.core.interfaces.controller.seasonController
 import com.annime.core.usecase.AnnimeSeviceImple
 import com.annime.core.usecase.CastServiceImpl
 import com.annime.core.usecase.EpisodeServiceImpl
+import com.annime.core.usecase.SeasonServiceImpl
 import io.ktor.application.*
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
@@ -47,6 +50,7 @@ fun Application.apiModule() {
         annimeController()
         episodeController()
         castController()
+        seasonController()
     }
 }
 
@@ -55,9 +59,11 @@ val injectModule = module {
     single { AnnimeSeviceImple(get()) }
     single { CastServiceImpl(get()) }
     single { EpisodeServiceImpl(get()) }
+    single { SeasonServiceImpl(get()) }
 
     // Repositories
     single { AnnimeRepository() }
     single { CastsRepository() }
     single { EpisodeRepository() }
+    single { SeasonRepository() }
 }
