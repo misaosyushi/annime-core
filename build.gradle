@@ -5,15 +5,17 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
     }
 }
 
 apply plugin: 'kotlin'
 apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'com.annime.core'
 version '0.0.1'
-mainClassName = "io.ktor.server.netty.EngineMain"
+mainClassName = "com.annime.core.ApplicationKt"
 
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']
@@ -38,4 +40,22 @@ dependencies {
     implementation "io.ktor:ktor-locations:$ktor_version"
 
     implementation "org.koin:koin-ktor:$koin_version"
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes "Implementation-Title": project.name,
+                "Implementation-Version": version,
+                "Main-Class": mainClassName
+    }
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    exclude "META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA"
+    with jar
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
 }

@@ -16,6 +16,7 @@ import io.ktor.application.*
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
+import io.ktor.locations.KtorExperimentalLocationsAPI
 import io.ktor.locations.Locations
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
@@ -32,7 +33,7 @@ fun main(args: Array<String>) {
     ).start(true)
 }
 
-
+@KtorExperimentalLocationsAPI
 fun Application.apiModule() {
     install(ContentNegotiation) {
         gson {
