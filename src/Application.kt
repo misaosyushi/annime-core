@@ -16,8 +16,11 @@ import io.ktor.application.*
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
+import io.ktor.http.HttpStatusCode
 import io.ktor.locations.KtorExperimentalLocationsAPI
 import io.ktor.locations.Locations
+import io.ktor.response.respond
+import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -48,6 +51,9 @@ fun Application.apiModule() {
         modules(injectModule)
     }
     routing {
+        get("/health") {
+            call.respond(HttpStatusCode.OK, "Health OK")
+        }
         annimeController()
         episodeController()
         castController()
