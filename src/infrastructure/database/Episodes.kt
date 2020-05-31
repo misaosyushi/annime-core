@@ -7,7 +7,7 @@ import org.jetbrains.exposed.dao.LongIdTable
 
 object Episodes : LongIdTable("episodes") {
     val annictId = long("annict_id")
-    val numberText = varchar("number_text", 10)
+    val numberText = varchar("number_text", 50)
     val title = varchar("title", 100).nullable()
 }
 
