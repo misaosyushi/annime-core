@@ -4,7 +4,7 @@ import com.annime.core.interfaces.dto.AnnimeDto
 import com.annime.core.interfaces.dto.DetailDto
 import com.annime.core.interfaces.dto.toDetailDto
 import com.annime.core.interfaces.dto.toDto
-import com.annime.core.usecase.AnnimeSeviceImple
+import com.annime.core.usecase.AnnimeUseCase
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.locations.KtorExperimentalLocationsAPI
@@ -24,15 +24,15 @@ data class Detail(val id: Long)
 
 @KtorExperimentalLocationsAPI
 fun Route.annimeController() {
-    val service: AnnimeSeviceImple by inject()
+    val useCase: AnnimeUseCase by inject()
 
     get<Annimes> { p ->
-        val annimes: List<AnnimeDto> = service.findBySeasonId(p.seasonId).map { it.toDto() }
+        val annimes: List<AnnimeDto> = useCase.findBySeasonId(p.seasonId).map { it.toDto() }
         call.respond(HttpStatusCode.OK, annimes)
     }
 
     get<Detail> { p ->
-        val detail: DetailDto? = service.findById(p.id)?.toDetailDto()
+        val detail: DetailDto? = useCase.findById(p.id)?.toDetailDto()
         detail?.let { call.respond(HttpStatusCode.OK, it) } ?: call.respond(HttpStatusCode.NotFound, "Not found.")
     }
 }

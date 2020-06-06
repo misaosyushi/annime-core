@@ -7,21 +7,29 @@ import org.jetbrains.exposed.sql.innerJoin
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class AnnimeRepository {
+interface IAnnimeRepository {
+    fun findAll(): List<AnnimeDao>
 
-    fun findAll(): List<AnnimeDao> {
+    fun findById(id: Long): AnnimeDao?
+
+    fun findBySeasonId(seasonId: Int): List<AnnimeDao>
+}
+
+class AnnimeRepository : IAnnimeRepository {
+
+    override fun findAll(): List<AnnimeDao> {
         return transaction {
             AnnimeDao.all().toList()
         }
     }
 
-    fun findById(id: Long): AnnimeDao? {
+    override fun findById(id: Long): AnnimeDao? {
         return transaction {
             AnnimeDao.findById(id)
         }
     }
 
-    fun findBySeasonId(seasonId: Int): List<AnnimeDao> {
+    override fun findBySeasonId(seasonId: Int): List<AnnimeDao> {
         val query = transaction {
             Annimes.innerJoin(Season, { Annimes.seasonId }, { Season.id }).select { Annimes.seasonId eq seasonId }
         }

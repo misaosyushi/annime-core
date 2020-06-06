@@ -1,17 +1,11 @@
 package com.annime.core
 
-import com.annime.core.infrastructure.repository.AnnimeRepository
-import com.annime.core.infrastructure.repository.CastsRepository
-import com.annime.core.infrastructure.repository.EpisodeRepository
-import com.annime.core.infrastructure.repository.SeasonRepository
+import com.annime.core.infrastructure.repository.*
 import com.annime.core.interfaces.controller.annimeController
 import com.annime.core.interfaces.controller.castController
 import com.annime.core.interfaces.controller.episodeController
 import com.annime.core.interfaces.controller.seasonController
-import com.annime.core.usecase.AnnimeSeviceImple
-import com.annime.core.usecase.CastServiceImpl
-import com.annime.core.usecase.EpisodeServiceImpl
-import com.annime.core.usecase.SeasonServiceImpl
+import com.annime.core.usecase.*
 import com.typesafe.config.ConfigFactory
 import io.ktor.application.*
 import io.ktor.config.HoconApplicationConfig
@@ -71,13 +65,13 @@ fun Application.apiModule() {
 
 val injectModule = module {
     // Services
-    single { AnnimeSeviceImple(get()) }
+    single { AnnimeUseCase(get()) }
     single { CastServiceImpl(get()) }
     single { EpisodeServiceImpl(get()) }
     single { SeasonServiceImpl(get()) }
 
     // Repositories
-    single { AnnimeRepository() }
+    single { AnnimeRepository() as IAnnimeRepository }
     single { CastsRepository() }
     single { EpisodeRepository() }
     single { SeasonRepository() }
