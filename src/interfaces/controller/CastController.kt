@@ -2,7 +2,7 @@ package com.annime.core.interfaces.controller
 
 import com.annime.core.interfaces.dto.CastDto
 import com.annime.core.interfaces.dto.toDto
-import com.annime.core.usecase.CastServiceImpl
+import com.annime.core.usecase.CastUseCase
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.locations.KtorExperimentalLocationsAPI
@@ -18,7 +18,7 @@ data class Casts(val annictId: Long)
 
 @KtorExperimentalLocationsAPI
 fun Route.castController() {
-    val service: CastServiceImpl by inject()
+    val service: CastUseCase by inject()
 
     get<Casts> { p ->
         val casts: List<CastDto> = service.findByAnnictId(p.annictId).map { it.toDto() }

@@ -66,13 +66,13 @@ fun Application.apiModule() {
 val injectModule = module {
     // Services
     single { AnnimeUseCase(get()) }
-    single { CastServiceImpl(get()) }
+    single { CastUseCase(get()) }
     single { EpisodeServiceImpl(get()) }
     single { SeasonServiceImpl(get()) }
 
     // Repositories
     single { AnnimeRepository() as IAnnimeRepository }
-    single { CastsRepository() }
+    single { CastsRepository() as ICastsRepository }
     single { EpisodeRepository() }
     single { SeasonRepository() }
 }
