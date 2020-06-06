@@ -18,10 +18,10 @@ data class Casts(val annictId: Long)
 
 @KtorExperimentalLocationsAPI
 fun Route.castController() {
-    val service: CastUseCase by inject()
+    val useCase: CastUseCase by inject()
 
     get<Casts> { p ->
-        val casts: List<CastDto> = service.findByAnnictId(p.annictId).map { it.toDto() }
+        val casts: List<CastDto> = useCase.findByAnnictId(p.annictId).map { it.toDto() }
         call.respond(HttpStatusCode.OK, casts)
     }
 }

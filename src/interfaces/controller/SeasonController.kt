@@ -11,10 +11,10 @@ import io.ktor.routing.get
 import org.koin.ktor.ext.inject
 
 fun Route.seasonController() {
-    val service: SeasonUseCase by inject()
+    val useCase: SeasonUseCase by inject()
 
     get("/season") {
-        val season: List<SeasonDto> = service.findAll().map { it.toDto() }
+        val season: List<SeasonDto> = useCase.findAll().map { it.toDto() }
         call.respond(HttpStatusCode.OK, season)
     }
 }

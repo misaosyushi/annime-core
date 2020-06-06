@@ -17,10 +17,10 @@ data class Episodes(val annictId: Long)
 
 @KtorExperimentalLocationsAPI
 fun Route.episodeController() {
-    val service: EpisodeUseCase by inject()
+    val useCase: EpisodeUseCase by inject()
 
     get<Episodes> { p ->
-        val episodes: List<EpisodeDto> = service.findByAnnictId(p.annictId).map { it.toDto() }
+        val episodes: List<EpisodeDto> = useCase.findByAnnictId(p.annictId).map { it.toDto() }
         call.respond(HttpStatusCode.OK, episodes)
     }
 }
