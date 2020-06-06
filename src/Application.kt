@@ -68,11 +68,11 @@ val injectModule = module {
     single { AnnimeUseCase(get()) }
     single { CastUseCase(get()) }
     single { EpisodeUseCase(get()) }
-    single { SeasonServiceImpl(get()) }
+    single { SeasonUseCase(get()) }
 
     // Repositories
     single { AnnimeRepository() as IAnnimeRepository }
     single { CastsRepository() as ICastsRepository }
     single { EpisodeRepository() as IEpisodeRepository }
-    single { SeasonRepository() }
+    single { SeasonRepository() as ISeasonRepository }
 }
