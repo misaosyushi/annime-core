@@ -12,7 +12,9 @@ import com.annime.core.usecase.AnnimeSeviceImple
 import com.annime.core.usecase.CastServiceImpl
 import com.annime.core.usecase.EpisodeServiceImpl
 import com.annime.core.usecase.SeasonServiceImpl
+import com.typesafe.config.ConfigFactory
 import io.ktor.application.*
+import io.ktor.config.HoconApplicationConfig
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
@@ -29,7 +31,13 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 fun main(args: Array<String>) {
-    Database.connect("jdbc:mysql://0.0.0.0:13306/annime?useSSL=false", "com.mysql.jdbc.Driver", "annime", "annime")
+    val config = HoconApplicationConfig(ConfigFactory.load())
+    Database.connect(
+        config.property("db.url").getString(),
+        config.property("db.driver").getString(),
+        config.property("db.user").getString(),
+        config.property("db.pass").getString()
+    )
     embeddedServer(
         Netty, watchPaths = listOf("build/classes"), port = 8080,
         module = Application::apiModule
