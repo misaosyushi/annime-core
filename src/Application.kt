@@ -1,10 +1,10 @@
 package com.annime.core
 
 import com.annime.core.infrastructure.repository.*
-import com.annime.core.interfaces.controller.annimeController
-import com.annime.core.interfaces.controller.castController
-import com.annime.core.interfaces.controller.episodeController
-import com.annime.core.interfaces.controller.seasonController
+import com.annime.core.presentation.controller.annimeController
+import com.annime.core.presentation.controller.castController
+import com.annime.core.presentation.controller.episodeController
+import com.annime.core.presentation.controller.seasonController
 import com.annime.core.usecase.*
 import com.typesafe.config.ConfigFactory
 import io.ktor.application.*

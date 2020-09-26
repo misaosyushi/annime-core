@@ -1,6 +1,6 @@
-package com.annime.core.interfaces.controller
+package com.annime.core.presentation.controller
 
-import com.annime.core.interfaces.dto.*
+import com.annime.core.presentation.dto.*
 import com.annime.core.usecase.EpisodeUseCase
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode

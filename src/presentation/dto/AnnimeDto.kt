@@ -1,23 +1,25 @@
-package com.annime.core.interfaces.dto
+package com.annime.core.presentation.dto
 
 import com.annime.core.infrastructure.database.AnnimeDao
 
-data class DetailDto(
+data class AnnimeDto(
     val id: Long,
     val annictId: Long,
     val title: String,
     val media: String,
+    val season: String,
     val officialSiteUrl: String,
     val twitterUserName: String?,
     val imageUrl: String?
 )
 
-fun AnnimeDao.toDetailDto(): DetailDto {
-    return DetailDto(
+fun AnnimeDao.toDto(): AnnimeDto {
+    return AnnimeDto(
         this.id.value,
         this.annictId,
         this.title,
         this.media,
+        this.seasonText,
         this.officialSiteUrl,
         this.twitterUserName,
         this.imageUrl

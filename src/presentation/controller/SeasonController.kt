@@ -1,7 +1,7 @@
-package com.annime.core.interfaces.controller
+package com.annime.core.presentation.controller
 
-import com.annime.core.interfaces.dto.SeasonDto
-import com.annime.core.interfaces.dto.toDto
+import com.annime.core.presentation.dto.SeasonDto
+import com.annime.core.presentation.dto.toDto
 import com.annime.core.usecase.SeasonUseCase
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode

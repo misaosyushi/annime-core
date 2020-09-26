@@ -1,4 +1,4 @@
-package com.annime.core.interfaces.dto
+package com.annime.core.presentation.dto
 
 import com.annime.core.infrastructure.database.CastDao
 
